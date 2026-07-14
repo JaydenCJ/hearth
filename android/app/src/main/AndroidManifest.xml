@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Stream microphone audio to the self-hosted hub. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Talk to the hub on the local network (or via VPN/Tailscale). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Hearth"
+        android:usesCleartextTraffic="true">
+        <!-- usesCleartextTraffic: home-lab hubs are typically plain http on
+             the LAN. Use https + auth_token when exposing beyond the LAN. -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- The service the system binds to when Hearth holds ROLE_ASSISTANT.
+             BIND_VOICE_INTERACTION ensures only the OS can bind it. -->
+        <service
+            android:name=".assist.HearthVoiceInteractionService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/voice_interaction_service" />
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+        </service>
+
+        <!-- Hosts the VoiceInteractionSession shown when the assistant key /
+             gesture is triggered. -->
+        <service
+            android:name=".assist.HearthSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION" />
+
+        <!-- Minimal RecognitionService: required by the voice-interaction
+             metadata schema. Hearth performs STT on the hub instead. -->
+        <service
+            android:name=".assist.HearthRecognitionService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.speech.RecognitionService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

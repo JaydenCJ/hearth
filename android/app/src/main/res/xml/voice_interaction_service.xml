@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Declares the components of Hearth's voice interaction implementation.
+     sessionService hosts the UI/recording session started by the assistant
+     key; recognitionService is the (hub-delegating) SpeechRecognizer entry
+     the schema requires. -->
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:recognitionService="dev.hearth.app.assist.HearthRecognitionService"
+    android:sessionService="dev.hearth.app.assist.HearthSessionService"
+    android:supportsAssist="true" />

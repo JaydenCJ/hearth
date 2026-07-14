@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" role="img" aria-label="Terminal recording of the hearth demo CLI session">
+  <!-- Terminal rendering of a real demo session: the command line below is
+       the exact command from the README Quickstart, and the output was
+       captured verbatim from running it in this repository. -->
+  <defs>
+    <style>
+      .term { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 15px; }
+      .dim  { fill: #8b949e; }
+      .fg   { fill: #e6edf3; }
+      .you  { fill: #7ee787; }
+      .bot  { fill: #79c0ff; }
+      .meta { fill: #d2a8ff; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="860" height="360" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect x="0" y="0" width="860" height="36" rx="10" fill="#161b22"/>
+  <rect x="0" y="26" width="860" height="10" fill="#161b22"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="18" r="6" fill="#28c840"/>
+  <text x="430" y="23" text-anchor="middle" class="term dim">hearth demo — zero-hardware mock pipeline</text>
+
+  <g class="term">
+    <text x="20" y="66"><tspan class="dim">$ </tspan><tspan class="fg">node dist/cli.js demo --mock</tspan></text>
+    <text x="20" y="96" class="dim">Hearth v0.1.0 demo — type a message, Ctrl-D or 'exit' to quit.</text>
+
+    <text x="20" y="132"><tspan class="you">you:</tspan><tspan class="fg"> hello</tspan></text>
+    <text x="20" y="158"><tspan class="bot">hearth</tspan><tspan class="meta"> [llm=mock 1ms]</tspan><tspan class="fg">: Hello, I am Hearth, your self-hosted assistant.</tspan></text>
+
+    <text x="20" y="194"><tspan class="you">you:</tspan><tspan class="fg"> こんにちは</tspan></text>
+    <text x="20" y="220"><tspan class="bot">hearth</tspan><tspan class="meta"> [llm=mock 0ms]</tspan><tspan class="fg">: こんにちは。Hearthです。ご用件をどうぞ。</tspan></text>
+
+    <text x="20" y="256"><tspan class="you">you:</tspan><tspan class="fg"> what time is it?</tspan></text>
+    <text x="20" y="282"><tspan class="bot">hearth</tspan><tspan class="meta"> [llm=mock 0ms]</tspan><tspan class="fg">: It is 05:08.</tspan></text>
+
+    <text x="20" y="322"><tspan class="you">you:</tspan><tspan class="fg"> exit</tspan></text>
+  </g>
+</svg>

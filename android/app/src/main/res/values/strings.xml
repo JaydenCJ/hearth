@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hearth</string>
+
+    <!-- Settings screen -->
+    <string name="label_server_url">Hub server URL</string>
+    <string name="hint_server_url">http://192.168.1.10:8321</string>
+    <string name="label_auth_token">Auth token (optional)</string>
+    <string name="hint_auth_token">leave empty if the hub has no token</string>
+    <string name="button_save">Save</string>
+    <string name="button_test_connection">Test connection</string>
+    <string name="button_grant_mic">Grant microphone access</string>
+    <string name="button_become_assistant">Set Hearth as device assistant</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="connection_ok">Connected to %1$s</string>
+    <string name="connection_failed">Connection failed: %1$s</string>
+    <string name="mic_granted">Microphone access granted</string>
+    <string name="mic_denied">Microphone access is required to talk to Hearth</string>
+    <string name="role_status_held">Hearth is the active assistant. Long-press power / assistant key to talk.</string>
+    <string name="role_status_not_held">Hearth is not the active assistant yet.</string>
+
+    <!-- Assistant session overlay -->
+    <string name="session_listening">Listening…</string>
+    <string name="session_thinking">Thinking…</string>
+    <string name="session_speaking">Speaking…</string>
+    <string name="session_done">Done</string>
+    <string name="session_error">Error: %1$s</string>
+    <string name="session_needs_permission">Microphone permission needed — opening Hearth settings</string>
+    <string name="session_stop">Stop</string>
+</resources>

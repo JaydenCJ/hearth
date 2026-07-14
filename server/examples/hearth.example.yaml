@@ -1,0 +1,74 @@
+# Hearth hub configuration — the full three-layer setup.
+#
+# Every layer (stt / tts / llm) declares named backends, a default, and
+# optional routing rules. Rules are evaluated top-to-bottom; the first rule
+# whose conditions ALL match wins, otherwise the default backend is used.
+# Copy this file, adjust URLs, then:  hearth serve --config hearth.yaml
+
+server:
+  host: 127.0.0.1      # bind 0.0.0.0 only if you know the network is yours
+  port: 8321
+  # Uncomment to require "Authorization: Bearer <token>" on every call:
+  # auth_token: change-me
+
+stt:
+  default: whisper
+  backends:
+    whisper:
+      type: whisper_cpp
+      # whisper.cpp example server:
+      #   ./build/bin/whisper-server -m models/ggml-base.bin --port 8081
+      url: http://127.0.0.1:8081
+      language: auto
+    mock:
+      type: mock          # built-in, for testing without hardware
+
+tts:
+  default: piper
+  # Japanese replies get the VOICEVOX voice; everything else uses Piper.
+  rules:
+    - lang: ja
+      backend: voicevox
+  backends:
+    piper:
+      type: piper
+      # python3 -m piper.http_server -m en_US-lessac-medium --port 5000
+      url: http://127.0.0.1:5000
+      voice: en_US-lessac-medium
+      speed: 1.0
+    voicevox:
+      type: voicevox
+      # VOICEVOX engine default port:
+      url: http://127.0.0.1:50021
+      speaker: 1          # 1 = Zundamon (normal); GET /speakers for the list
+      speed: 1.0
+    mock:
+      type: mock
+
+llm:
+  default: local
+  # Keep everything local by default; only the examples below ever leave
+  # your network — delete the "cloud" backend for a fully offline hub.
+  rules:
+    - tag: private        # phone app can tag a request to force-local...
+      backend: local      # ...and first-match-wins keeps it ahead of the rest
+    - contains: "search the web"
+      backend: cloud
+    - min_chars: 400      # long analytical prompts -> bigger cloud model
+      backend: cloud
+  backends:
+    local:
+      type: openai_compat
+      # llama.cpp:  llama-server -m model.gguf --port 11434
+      # or Ollama:  base_url: http://127.0.0.1:11434/v1
+      base_url: http://127.0.0.1:11434/v1
+      model: qwen2.5:7b
+      temperature: 0.7
+      max_tokens: 512
+    cloud:
+      type: openai_compat
+      base_url: https://openrouter.ai/api/v1
+      model: meta-llama/llama-3.3-70b-instruct
+      api_key: sk-or-REPLACE_ME
+    mock:
+      type: mock

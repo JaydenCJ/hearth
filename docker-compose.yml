@@ -1,0 +1,34 @@
+# Hearth — self-hosted voice assistant hub.
+#
+# `docker compose up -d` starts the hub with the built-in mock backends
+# (zero prerequisites). To wire up real engines, copy
+# server/examples/hearth.example.yaml into the config volume:
+#
+#   docker compose cp server/examples/hearth.example.yaml hearth:/config/hearth.yaml
+#   docker compose restart hearth
+#
+# The hub is published on 127.0.0.1 only; put it behind your own reverse
+# proxy / VPN (and set auth_token) before exposing it to the LAN.
+
+services:
+  hearth:
+    build: ./server
+    image: hearth-server:0.1.0
+    container_name: hearth
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8321:8321"
+    volumes:
+      - hearth-config:/config
+    environment:
+      # Overridable via .env (see .env.example).
+      HEARTH_CONFIG: ${HEARTH_CONFIG:-/config/hearth.yaml}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8321/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  hearth-config:

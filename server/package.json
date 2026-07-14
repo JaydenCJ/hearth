@@ -1,0 +1,60 @@
+{
+  "name": "hearth-server",
+  "version": "0.1.0",
+  "description": "A self-hosted voice assistant hub — your phone is the microphone, your home server does the thinking; pluggable STT/TTS/LLM backends, docker compose deploy.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "hearth": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "examples"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "start": "node dist/cli.js serve --mock"
+  },
+  "keywords": [
+    "voice-assistant",
+    "self-hosted",
+    "whisper.cpp",
+    "piper",
+    "voicevox",
+    "stt",
+    "tts",
+    "llm",
+    "privacy"
+  ],
+  "dependencies": {
+    "ws": "^8.18.0",
+    "yaml": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.10"
+  },
+  "author": "JaydenCJ",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaydenCJ/hearth.git"
+  },
+  "homepage": "https://github.com/JaydenCJ/hearth#readme",
+  "bugs": {
+    "url": "https://github.com/JaydenCJ/hearth/issues"
+  }
+}

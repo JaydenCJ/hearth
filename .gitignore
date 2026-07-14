@@ -1,0 +1,42 @@
+# --- dependencies ---
+node_modules/
+
+# --- build outputs ---
+dist/
+build/
+out/
+
+# --- model weights & large artifacts (never commit) ---
+models/
+*.gguf
+*.onnx
+*.safetensors
+
+# --- env & secrets ---
+.env
+.env.*
+!.env.example
+
+# --- local configs / runtime artifacts ---
+hearth.yaml
+hearth.json
+*.wav
+*.tsbuildinfo
+
+# --- Android / Gradle ---
+.gradle/
+.kotlin/
+android/local.properties
+android/**/build/
+*.apk
+*.aab
+
+# --- caches / editor / OS ---
+.DS_Store
+.idea/
+*.iml
+.vscode/
+.cache/
+coverage/
+*.log
+tmp/

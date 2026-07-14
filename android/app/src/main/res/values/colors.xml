@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hearth_ember">#D96C2C</color>
+    <color name="hearth_coal">#2B211B</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
